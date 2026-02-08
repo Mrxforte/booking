@@ -16,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -24,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _cityController.dispose();
     _countryController.dispose();
     _bioController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -80,6 +82,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 maxLines: 3,
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Enter bio' : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  if (value.length < 8) {
+                    return 'Password must be at least 8 characters';
+                  }
+                  if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                    return 'Password must contain at least one uppercase letter';
+                  }
+                  if (!RegExp(r'[a-z]').hasMatch(value)) {
+                    return 'Password must contain at least one lowercase letter';
+                  }
+                  if (!RegExp(r'[0-9]').hasMatch(value)) {
+                    return 'Password must contain at least one number';
+                  }
+                  if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
+                    return 'Password must contain at least one special character (!@#\$&*~)';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 24),
               ElevatedButton(onPressed: _submit, child: Text('Login')),

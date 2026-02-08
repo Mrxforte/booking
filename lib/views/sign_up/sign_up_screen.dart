@@ -15,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -23,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _cityController.dispose();
     _countryController.dispose();
     _bioController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -79,6 +81,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 maxLines: 3,
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Enter bio' : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                obscureText: true, // This hides the input text
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 24),
               ElevatedButton(onPressed: _submit, child: Text('Login')),
