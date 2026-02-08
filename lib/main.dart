@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
-      home: const SplashScreen(),
+      initialRoute: SplashScreen.routeName,
     );
   }
 }

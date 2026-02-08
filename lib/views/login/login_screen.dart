@@ -1,3 +1,5 @@
+import 'package:booking/app/constants/app_strings.dart';
+import 'package:booking/views/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,27 +13,18 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _cityController.dispose();
-    _countryController.dispose();
-    _bioController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      // Handle login logic here
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Logging in...')));
@@ -41,84 +34,132 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _firstNameController,
-                decoration: InputDecoration(labelText: 'First Name'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter first name' : null,
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 32.0),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.welcomeMessage,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 40),
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: AppStrings.emailLabel,
+                    ),
+                    validator: (value) => value == null || value.isEmpty
+                        ? AppStrings.emailEmptyError
+                        : null,
+                  ),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      labelText: AppStrings.passwordLabel,
+                      border: UnderlineInputBorder(),
+                    ),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return AppStrings.passwordEmptyError;
+                      }
+                      if (value.length < 8) {
+                        return AppStrings.passwordLengthError;
+                      }
+                      if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                        return AppStrings.passwordUppercaseError;
+                      }
+                      if (!RegExp(r'[a-z]').hasMatch(value)) {
+                        return AppStrings.passwordLowercaseError;
+                      }
+                      if (!RegExp(r'[0-9]').hasMatch(value)) {
+                        return AppStrings.passwordNumberError;
+                      }
+                      if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
+                        return AppStrings.passwordSpecialCharError;
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: _submit,
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                    ),
+                    child: Text('Login'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Don\'t have an account?'),
+                      TextButton(
+                        onPressed: () {
+                          // Navigate to sign up screen
+                          Navigator.pushNamed(context, SignUpScreen.routeName);
+                        },
+                        child: Text('Sign Up'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _lastNameController,
-                decoration: InputDecoration(labelText: 'Last Name'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter last name' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _cityController,
-                decoration: InputDecoration(labelText: 'City'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter city' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _countryController,
-                decoration: InputDecoration(labelText: 'Country'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter country' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _bioController,
-                decoration: InputDecoration(labelText: 'Bio'),
-                maxLines: 3,
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter bio' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  if (value.length < 8) {
-                    return 'Password must be at least 8 characters';
-                  }
-                  if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                    return 'Password must contain at least one uppercase letter';
-                  }
-                  if (!RegExp(r'[a-z]').hasMatch(value)) {
-                    return 'Password must contain at least one lowercase letter';
-                  }
-                  if (!RegExp(r'[0-9]').hasMatch(value)) {
-                    return 'Password must contain at least one number';
-                  }
-                  if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
-                    return 'Password must contain at least one special character (!@#\$&*~)';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 24),
-              ElevatedButton(onPressed: _submit, child: Text('Login')),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+}
+
+class EmailPasswordFields extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final String? Function(String?)? emailValidator;
+  final String? Function(String?)? passwordValidator;
+
+  const EmailPasswordFields({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+    this.emailValidator,
+    this.passwordValidator,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(
+          controller: emailController,
+          decoration: InputDecoration(
+            labelText: 'Email',
+            border: OutlineInputBorder(),
+          ),
+          keyboardType: TextInputType.emailAddress,
+          validator: emailValidator,
+        ),
+        const SizedBox(height: 16),
+        TextFormField(
+          controller: passwordController,
+          decoration: InputDecoration(
+            labelText: 'Password',
+            border: OutlineInputBorder(),
+          ),
+          obscureText: true,
+          validator: passwordValidator,
+        ),
+      ],
     );
   }
 }

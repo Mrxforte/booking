@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String routeName = '/login';
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  static const String routeName = '/sign_up';
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -30,75 +30,81 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      // Handle login logic here
+      // Handle sign up logic here
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Logging in...')));
+      ).showSnackBar(SnackBar(content: Text('Signing up...')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text('Sign Up')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
-              TextFormField(
-                controller: _firstNameController,
-                decoration: InputDecoration(labelText: 'First Name'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter first name' : null,
+              Column(
+                children: [
+                  TextFormField(
+                    controller: _firstNameController,
+                    decoration: InputDecoration(labelText: 'First Name'),
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Enter first name'
+                        : null,
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _lastNameController,
+                    decoration: InputDecoration(labelText: 'Last Name'),
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Enter last name'
+                        : null,
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _cityController,
+                    decoration: InputDecoration(labelText: 'City'),
+                    validator: (value) =>
+                        value == null || value.isEmpty ? 'Enter city' : null,
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _countryController,
+                    decoration: InputDecoration(labelText: 'Country'),
+                    validator: (value) =>
+                        value == null || value.isEmpty ? 'Enter country' : null,
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _bioController,
+                    decoration: InputDecoration(labelText: 'Bio'),
+                    maxLines: 3,
+                    validator: (value) =>
+                        value == null || value.isEmpty ? 'Enter bio' : null,
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: UnderlineInputBorder(),
+                    ),
+                    obscureText: true, // This hides the input text
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 24),
+                  ElevatedButton(onPressed: _submit, child: Text('Sign Up')),
+                ],
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _lastNameController,
-                decoration: InputDecoration(labelText: 'Last Name'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter last name' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _cityController,
-                decoration: InputDecoration(labelText: 'City'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter city' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _countryController,
-                decoration: InputDecoration(labelText: 'Country'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter country' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _bioController,
-                decoration: InputDecoration(labelText: 'Bio'),
-                maxLines: 3,
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter bio' : null,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true, // This hides the input text
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 24),
-              ElevatedButton(onPressed: _submit, child: Text('Login')),
             ],
           ),
         ),
