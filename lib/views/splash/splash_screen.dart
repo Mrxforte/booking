@@ -16,11 +16,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // navigate to login screen after 3 seconds
-    Future.delayed(Duration(seconds: 3), () {
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-    });
+    _navigateToHome();
+  }
+
+  Future<void> _navigateToHome() async {
+    // This will pause for 3 seconds before executing the code in the callback
+    await Future.delayed(const Duration(seconds: 3), () {});
+
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    }
   }
 
   @override
