@@ -1,4 +1,5 @@
 import 'package:booking/app/constants/app_strings.dart';
+import 'package:booking/app/utils/validators.dart';
 import 'package:booking/views/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Logging in...')));
+      ).showSnackBar(
+        const SnackBar(content: Text(AppStrings.loggingInMessage)),
+      );
     }
   }
 
@@ -39,57 +42,36 @@ class _LoginScreenState extends State<LoginScreen> {
         child: ListView(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 32.0),
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     AppStrings.welcomeMessage,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: AppStrings.emailLabel,
                     ),
-                    validator: (value) => value == null || value.isEmpty
-                        ? AppStrings.emailEmptyError
-                        : null,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: Validators.validateEmail,
                   ),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: AppStrings.passwordLabel,
                       border: UnderlineInputBorder(),
                     ),
                     obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppStrings.passwordEmptyError;
-                      }
-                      if (value.length < 8) {
-                        return AppStrings.passwordLengthError;
-                      }
-                      if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                        return AppStrings.passwordUppercaseError;
-                      }
-                      if (!RegExp(r'[a-z]').hasMatch(value)) {
-                        return AppStrings.passwordLowercaseError;
-                      }
-                      if (!RegExp(r'[0-9]').hasMatch(value)) {
-                        return AppStrings.passwordNumberError;
-                      }
-                      if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
-                        return AppStrings.passwordSpecialCharError;
-                      }
-                      return null;
-                    },
+                    validator: Validators.validatePassword,
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: _submit,
                     style: ElevatedButton.styleFrom(
@@ -97,18 +79,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(4.0),
                       ),
                     ),
-                    child: Text('Login'),
+                    child: const Text(AppStrings.loginButton),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Don\'t have an account?'),
+                      const Text(AppStrings.noAccountText),
                       TextButton(
                         onPressed: () {
-                          // Navigate to sign up screen
                           Navigator.pushNamed(context, SignUpScreen.routeName);
                         },
-                        child: Text('Sign Up'),
+                        child: const Text(AppStrings.signUpButton),
                       ),
                     ],
                   ),

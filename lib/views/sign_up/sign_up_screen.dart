@@ -1,3 +1,5 @@
+import 'package:booking/app/constants/app_strings.dart';
+import 'package:booking/app/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
@@ -21,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
+    _emailController.dispose();
     _cityController.dispose();
     _countryController.dispose();
     _bioController.dispose();
@@ -30,17 +34,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      // Handle sign up logic here
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Signing up...')));
+      ).showSnackBar(
+        const SnackBar(content: Text(AppStrings.signingUpMessage)),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
+      appBar: AppBar(title: const Text(AppStrings.signUpButton)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -49,60 +54,80 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               Column(
                 children: [
+                  const Text(
+                    AppStrings.signUpText,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 24),
                   TextFormField(
                     controller: _firstNameController,
-                    decoration: InputDecoration(labelText: 'First Name'),
-                    validator: (value) => value == null || value.isEmpty
-                        ? 'Enter first name'
-                        : null,
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.firstNameLabel,
+                    ),
+                    validator: (value) =>
+                        Validators.validateRequired(value, 'first name'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _lastNameController,
-                    decoration: InputDecoration(labelText: 'Last Name'),
-                    validator: (value) => value == null || value.isEmpty
-                        ? 'Enter last name'
-                        : null,
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.lastNameLabel,
+                    ),
+                    validator: (value) =>
+                        Validators.validateRequired(value, 'last name'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.emailLabel,
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: Validators.validateEmail,
+                  ),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _cityController,
-                    decoration: InputDecoration(labelText: 'City'),
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.cityLabel,
+                    ),
                     validator: (value) =>
-                        value == null || value.isEmpty ? 'Enter city' : null,
+                        Validators.validateRequired(value, 'city'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _countryController,
-                    decoration: InputDecoration(labelText: 'Country'),
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.countryLabel,
+                    ),
                     validator: (value) =>
-                        value == null || value.isEmpty ? 'Enter country' : null,
+                        Validators.validateRequired(value, 'country'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _bioController,
-                    decoration: InputDecoration(labelText: 'Bio'),
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.bioLabel,
+                    ),
                     maxLines: 3,
                     validator: (value) =>
-                        value == null || value.isEmpty ? 'Enter bio' : null,
+                        Validators.validateRequired(value, 'bio'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
+                    decoration: const InputDecoration(
+                      labelText: AppStrings.passwordLabel,
                       border: UnderlineInputBorder(),
                     ),
-                    obscureText: true, // This hides the input text
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
+                    obscureText: true,
+                    validator: Validators.validatePassword,
                   ),
-                  SizedBox(height: 24),
-                  ElevatedButton(onPressed: _submit, child: Text('Sign Up')),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: _submit,
+                    child: const Text(AppStrings.signUpButton),
+                  ),
                 ],
               ),
             ],

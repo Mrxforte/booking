@@ -33,18 +33,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // splash screen with auth navigate
     return Scaffold(
-      // logo and text
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // logo
             Icon(AppIcons.logo, size: 100),
-            SizedBox(height: 20),
-            // text
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               AppStrings.appName,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
