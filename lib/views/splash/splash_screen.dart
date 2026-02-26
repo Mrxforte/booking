@@ -1,12 +1,10 @@
 import 'package:booking/app/constants/app_icons.dart';
 import 'package:booking/app/constants/app_strings.dart';
 import 'package:flutter/material.dart';
-import '../login/login_screen.dart';
+import 'package:booking/app/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-  // route name
-  static const String routeName = '/splash';
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -24,10 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 3), () {});
 
     if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
+      // Navigate to the login screen after the delay
+      Navigator.pushReplacementNamed(context, AppRoutes.login);
     }
   }
 

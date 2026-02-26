@@ -1,5 +1,5 @@
 import 'package:booking/app/constants/app_strings.dart';
-import 'package:booking/views/splash/splash_screen.dart';
+import 'package:booking/app/routes/routesdart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
-      initialRoute: SplashScreen.routeName,
+      initialRoute: AppRoutes.splash,
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:booking/app/constants/app_strings.dart';
+import 'package:booking/app/routes/routesdart';
 import 'package:booking/views/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -106,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextButton(
                         onPressed: () {
                           // Navigate to sign up screen
-                          Navigator.pushNamed(context, SignUpScreen.routeName);
+                          Navigator.pushNamed(context, AppRoutes.signUp);
                         },
                         child: Text('Sign Up'),
                       ),
