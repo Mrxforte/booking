@@ -1,6 +1,5 @@
 import 'package:booking/app/constants/app_strings.dart';
-import 'package:booking/app/routes/routesdart';
-import 'package:booking/views/sign_up/sign_up_screen.dart';
+import 'package:booking/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
