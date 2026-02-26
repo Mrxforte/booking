@@ -1,16 +1,64 @@
-# booking
 
-A new Flutter project.
+# Booking Flutter App
+
+A cross-platform booking application built with Flutter.
+
+## Features
+- User authentication (login & sign up)
+- Profile management
+- Host and guest modes
+- Booking system
+- Responsive UI for Android, iOS, Web, Windows, macOS, and Linux
+
+## Screenshots
+<!-- Add screenshots here -->
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- Dart
 
-A few resources to get you started if this is your first Flutter project:
+### Installation
+1. Clone the repository:
+	```bash
+	git clone https://github.com/Mrxforte/booking.git
+	```
+2. Navigate to the project directory:
+	```bash
+	cd booking
+	```
+3. Get dependencies:
+	```bash
+	flutter pub get
+	```
+4. Run the app:
+	```bash
+	flutter run
+	```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Project Structure
+```
+lib/
+  main.dart
+  app/
+  controllers/
+  models/
+  views/
+	 login/
+	 sign_up/
+	 splash/
+	 widgets/
+	 profile/
+	 main/
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+This project is licensed under the MIT License.
+
+---
+
+> Made with ❤️ using Flutter
