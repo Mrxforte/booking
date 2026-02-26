@@ -46,9 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    AppStrings.welcomeMessage,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  Center(
+                    child: Text(
+                      AppStrings.welcomeMessage,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 40),
                   TextFormField(
