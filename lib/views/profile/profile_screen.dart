@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Spacer(),
+                SizedBox(width: 20),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

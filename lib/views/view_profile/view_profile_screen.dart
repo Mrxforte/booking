@@ -27,7 +27,7 @@ class ViewProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(width: 20),
+                Spacer(),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
@@ -40,15 +40,47 @@ class ViewProfileScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40),
-            UserInfoTileWidget(
-              text: "Personal Information",
-              icon: Icons.person,
-            ),
-            UserInfoTileWidget(text: "Become a Host ", icon: Icons.hotel),
-            UserInfoTileWidget(text: "Logout"),
+            // about me section
+            AboutWidgets(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class AboutWidgets extends StatelessWidget {
+  const AboutWidgets({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'About Me',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.',
+          style: TextStyle(fontSize: 16),
+        ),
+        SizedBox(height: 20),
+        // location section
+        Text(
+          'Location',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Text('New York, USA', style: TextStyle(fontSize: 16)),
+        // reviews section
+        SizedBox(height: 20),
+        Text(
+          'Reviews',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }
