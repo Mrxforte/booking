@@ -1,3 +1,4 @@
+import 'package:booking/views/widgets/reviews_widget.dart';
 import 'package:booking/views/widgets/user_info_tile_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -79,6 +80,20 @@ class AboutWidgets extends StatelessWidget {
         Text(
           'Reviews',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+
+        // List of reviews
+        // with litview builder and review widget
+        // it is not showing fix error
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.4,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: 30,
+            itemBuilder: (context, index) {
+              return ReviewsWidget();
+            },
+          ),
         ),
       ],
     );
