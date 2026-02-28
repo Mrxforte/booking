@@ -7,7 +7,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home'), centerTitle: true),
-      body: Center(child: Text('This is the Home screen')),
+      body: Column(
+        children: [
+          // searchbar
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+            child: TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                label: Text("Search"),
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
