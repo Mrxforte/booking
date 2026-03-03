@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:booking/views/view_post/view_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:star_rating/star_rating.dart';
 
@@ -8,7 +9,12 @@ class PostTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ViewPostScreen()),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
